@@ -603,11 +603,6 @@ class wf::render_manager::impl
 
     void update_depth_attachment(int fb)
     {
-        if ((fb == depth_buffer.attached_to) || (fb == 0))
-        {
-            return;
-        }
-
         if (depth_buffer.tex == (GLuint) - 1)
         {
             GL_CALL(glGenTextures(1, &depth_buffer.tex));
@@ -625,10 +620,16 @@ class wf::render_manager::impl
             depth_buffer.height = height;
         }
 
+        if ((fb == depth_buffer.attached_to) || (fb == 0))
+        {
+            return;
+        }
+
         GL_CALL(glBindTexture(GL_TEXTURE_2D, depth_buffer.tex));
         GL_CALL(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
             GL_TEXTURE_2D, depth_buffer.tex, 0));
         GL_CALL(glBindTexture(GL_TEXTURE_2D, 0));
+        depth_buffer.attached_to = fb;
     }
 
     void update_bound_output()
