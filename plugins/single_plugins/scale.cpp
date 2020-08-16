@@ -183,7 +183,7 @@ class wayfire_scale : public wf::plugin_interface_t
     bool all_same_as_current_workspace_views()
     {
         return get_all_workspace_views().size() ==
-            get_current_workspace_views().size();
+               get_current_workspace_views().size();
     }
 
     bool handle_toggle(bool want_all_workspaces)
@@ -191,6 +191,7 @@ class wayfire_scale : public wf::plugin_interface_t
         if (active && all_same_as_current_workspace_views())
         {
             deactivate();
+
             return true;
         }
 
@@ -198,13 +199,13 @@ class wayfire_scale : public wf::plugin_interface_t
         if (active)
         {
             all_workspaces_option_changed();
+
             return true;
         } else
         {
             return activate();
         }
     }
-
 
     wf::activator_callback toggle_cb = [=] (wf::activator_source_t, uint32_t)
     {
