@@ -188,8 +188,8 @@ class wayfire_scale : public wf::plugin_interface_t
 
     bool handle_toggle(bool want_all_workspaces)
     {
-        if ((active && all_same_as_current_workspace_views())
-            || (want_all_workspaces == this->all_workspaces))
+        if (active && (all_same_as_current_workspace_views()
+                || (want_all_workspaces == this->all_workspaces)))
         {
             deactivate();
 
